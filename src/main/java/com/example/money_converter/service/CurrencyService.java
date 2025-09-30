@@ -14,6 +14,8 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class CurrencyService{
 
+    Logger logger = Logger.getLogger(CurrencyService.class.getName());
+
     private final RestTemplate restTemplate = new RestTemplate();
     private String API_URL = "https://api.exchangerate-api.com/v4/latest/";
     private String API_URL_V6 = "https://v6.exchangerate-api.com/v6/YOUR-API-KEY/latest/";
@@ -36,7 +38,7 @@ public class CurrencyService{
             URL = new URL(url);
             request = (HttpURLConnection) URL.openConnection();
         } catch (Exception e) {
-
+            logger.log(Level.WARNING, e.getMessage());
         }
         return request;
     }
